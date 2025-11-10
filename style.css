@@ -3,6 +3,7 @@ body {
     flex-direction: column;
     gap: 12px;
     font-size: 20px;
+    font-family: 'Mali', sans-serif;
 }
 
 h1 {
@@ -18,4 +19,5 @@ button {
     font-weight: 600;
     font-size: 18px;
     border: 2px solid gray;
+    font-family: 'Mali';
 }
