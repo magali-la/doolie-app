@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./app.js"></script>
+</head>
+<body>
+    <h1>Doolie Task Manager</h1>
+    <label for="taskName">Task Name</label>
+    <input id="taskName" type="text">
+    <label for="category">Category</label>
+    <select id="category" name="category">
+        <option value="">Select a category</option>
+        <option value="School">School</option>
+        <option value="Chores">Chores</option>
+    </select>
+    <label for="deadline">Deadline</label>
+    <input id="deadline" type="date">
+    <label for="status">Status</label>
+    <select id="status" name="status">
+        <option value="">Select a status</option>
+        <option value="Not Started">Not started</option>
+        <option value="In progress">In progress</option>
+        <option value="Done">Done</option>
+    </select>
+    <button id="addTaskButton">Add Task</button>
+    <ul id="taskList">
+    </ul>
+</body>
+</html>
