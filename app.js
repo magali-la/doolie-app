@@ -13,6 +13,7 @@ window.addEventListener("load", function(){
         let deadlineInput = deadlineEl.value;
         let statusEl = document.getElementById("status");
         let statusInput = statusEl.value;
+        let taskListEl = document.getElementById("taskList");
 
         // define a general task object
         let taskObj = {
@@ -28,5 +29,17 @@ window.addEventListener("load", function(){
             return console.log('User must input all fields');
         }
 
+        // function the taskObj created into the tasks array
+        function addTasks(task){
+            tasks.push(task);
+            console.log(tasks);
+        }
+        addTasks(taskObj);
+        // create the li that will be appended
+        let taskListItemEl = document.createElement("li");
+        // turn the object's values into a string, apply as inner text
+        taskListItemEl.innerText = `Task: ${taskObj.task} | Category: ${taskObj.task} | Deadline: ${taskObj.date} | Status: ${taskObj.stat}`;
+        // append the ul with the list item with your input
+        taskListEl.appendChild(taskListItemEl);
     });
 });
