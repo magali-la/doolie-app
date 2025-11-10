@@ -37,6 +37,8 @@ window.addEventListener("load", function(){
         addTasks(taskObj);
         // create the li that will be appended
         let taskListItemEl = document.createElement("li");
+        // add class to li's for bootstrap styling
+        taskListItemEl.classList.add('list-group-item');
         // turn the object's values into a string, apply as inner text
         taskListItemEl.innerText = `Task: ${taskObj.task} | Category: ${taskObj.task} | Deadline: ${taskObj.date} | Status: ${taskObj.stat}`;
         // append the ul with the list item with your input
