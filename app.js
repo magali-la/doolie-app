@@ -23,25 +23,51 @@ window.addEventListener("load", function(){
             stat: statusInput
         };
 
-        // add object to array if they are all filled
+        // give alert if any of the fields are empty
         if (taskInput === '' || categoryInput === '' || deadlineInput === '' || statusInput == ''){
             alert("Fill in all fields");
             return console.log('User must input all fields');
         }
 
-        // function the taskObj created into the tasks array
+        // function to add taskObj created into the tasks array logging each entry
         function addTasks(task){
             tasks.push(task);
             console.log(tasks);
         }
         addTasks(taskObj);
-        // create the li that will be appended
+
+        // function to get badge color for the status section of the task tile
+        function getBadgeColor(status) {
+            switch(status){
+                case 'Completed':
+                    return 'text-bg-success';
+                case 'Overdue':
+                    return 'text-bg-danger';
+                default:
+                    return 'text-bg-warning';
+            }
+        }
+        let badgeColor = getBadgeColor(taskObj.stat);
+
+        // create the list item for the task list
         let taskListItemEl = document.createElement("li");
         // add class to li's for bootstrap styling
         taskListItemEl.classList.add('list-group-item');
-        // turn the object's values into a string, apply as inner text
-        taskListItemEl.innerText = `Task: ${taskObj.task} | Category: ${taskObj.task} | Deadline: ${taskObj.date} | Status: ${taskObj.stat}`;
-        // append the ul with the list item with your input
+        // create a div to put in the li
+        let taskListItemDivEl = document.createElement("div");
+        taskListItemDivEl.innerHTML = `
+            <div class="row">
+                <div class="col">${taskObj.task}</div>
+                <div class="col">${taskObj.cat}</div>
+                <div class="col">${taskObj.date}</div>
+                <div class="col"><span class="badge rounded-pill ${badgeColor}">${taskObj.stat}</span>
+                </div>
+                <div class="col"></div>
+            </div>`
+    
+        // append the task List with the list item in a column layout
+        taskListItemEl.appendChild(taskListItemDivEl);
         taskListEl.appendChild(taskListItemEl);
+
     });
 });

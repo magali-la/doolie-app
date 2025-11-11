@@ -11,14 +11,12 @@ h1 {
     text-align: center;
 }
 
-button {
-    padding: 16px 36px;
+#addTaskButton {
     width: fit-content;
     align-self: center;
-    border-radius: 20px;
     background-color: greenyellow;
-    font-weight: 600;
-    font-size: 18px;
-    border: 2px solid gray;
-    font-family: 'Mali';
+}
+#addTaskButton:hover {
+    background-color: rgba(var(--bs-success-rgb));
+    color: white;
 }

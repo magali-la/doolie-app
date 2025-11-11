@@ -27,12 +27,19 @@
     <label for="status">Status</label>
     <select id="status" name="status" class="form-select">
         <option value="">Select a status</option>
-        <option value="Not Started">Not started</option>
-        <option value="In progress">In progress</option>
-        <option value="Done">Done</option>
+        <option value="In Progress">In Progress</option>
+        <option value="Completed">Completed</option>
+        <option value="Overdue">Overdue</option>
     </select>
-    <button id="addTaskButton">Add Task</button>
+    <button id="addTaskButton" class="btn btn-lg">Add Task</button>
     <h2>Your Tasks:</h2>
+    <div class="row">
+        <div class="col"><p>Task</p></div>
+        <div class="col"><p>Category</p></div>
+        <div class="col"><p>Deadline</p></div>
+        <div class="col"><p>Status</p></div>
+        <div class="col"><p>Update Status</p></div>
+    </div>
     <ul id="taskList" class="list-group">
     </ul>
 </body>
