@@ -49,6 +49,12 @@ window.addEventListener("load", function(){
         }
         let badgeColor = getBadgeColor(taskObj.stat);
 
+        // create badge element to manipulate it
+        let badgeEl = document.createElement('span');
+        // add bootstrap classes for the badge
+        badgeEl.classList.add("badge", "rounded-pill", badgeColor);
+        badgeEl.innerHTML = taskObj.stat;
+
         // create the list item for the task list
         let taskListItemEl = document.createElement("li");
         // add class to li's for bootstrap styling
@@ -60,14 +66,30 @@ window.addEventListener("load", function(){
                 <div class="col">${taskObj.task}</div>
                 <div class="col">${taskObj.cat}</div>
                 <div class="col">${taskObj.date}</div>
-                <div class="col"><span class="badge rounded-pill ${badgeColor}">${taskObj.stat}</span>
-                </div>
-                <div class="col"></div>
+                <div class="col" id="badgeListItem"></div>
+                <div class="col" id="updateListItem"></div>
             </div>`
-    
+        
+        // adpend the column for the badge with the badge element
+        let badgeListItem = taskListItemDivEl.querySelector('#badgeListItem');
+        badgeListItem.appendChild(badgeEl);        
+
+        // create a div to hold the dropdown 
+        let updateStatusDiv = document.createElement('div');        
+        updateStatusDiv.innerHTML = `
+            <select id="updateStatus" class="form-select">
+                <option value="">Update Status</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+            </select>
+        `;
+
+        // inject the updateStatusDiv in the update column in the task tile
+        let updateListItem = taskListItemDivEl.querySelector('#updateListItem');
+        updateListItem.appendChild(updateStatusDiv);
+
         // append the task List with the list item in a column layout
         taskListItemEl.appendChild(taskListItemDivEl);
         taskListEl.appendChild(taskListItemEl);
-
     });
 });
