@@ -88,6 +88,26 @@ window.addEventListener("load", function(){
         let updateListItem = taskListItemDivEl.querySelector('#updateListItem');
         updateListItem.appendChild(updateStatusDiv);
 
+        // add event listener for the update status column
+        updateStatusDiv.addEventListener("change", (event) =>{
+            // target the dropdown and find the value user changed
+            if (event.target.id === 'updateStatus'){
+                let newStatus = event.target.value;
+
+                // update the taskObj.stat to the value selected
+                taskObj.stat = newStatus;
+                // call the badgeColor function with this new status
+                badgeColor = getBadgeColor(newStatus);
+
+                // update badgeEl with new classes and inner text with the status they chose
+                badgeEl.innerText = newStatus;
+                // remove any of the classes which style the badge
+                badgeEl.classList.remove("text-bg-success", "text-bg-warning", "text-bg-danger");
+                // add the new badge color based on what was clicked
+                badgeEl.classList.add(badgeColor);
+            }
+        })
+
         // append the task List with the list item in a column layout
         taskListItemEl.appendChild(taskListItemDivEl);
         taskListEl.appendChild(taskListItemEl);
