@@ -123,6 +123,9 @@ window.addEventListener("load", function(){
     filterGroupEl.addEventListener("change", (event) => {
         // target the actual input elements by bootstrap class 
         if (event.target.classList.contains('btn-check')) {
+            // define variable for the value of the radio button selected
+            let filterId = event.target.value;
+            console.log(`Filter clicked: '${filterId}'`);
         }
     });
 
