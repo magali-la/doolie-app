@@ -1,8 +1,7 @@
 window.addEventListener("load", function(){
     let tasks = [];
     let buttonEl = document.getElementById("addTaskButton");
-    // create the list item for the task list
-    let taskListItemEl = document.createElement("li");
+    let taskListEl = document.getElementById("taskList");
 
     // function to get badge color for the status section of the task tile
     function getBadgeColor(status) {
@@ -27,7 +26,6 @@ window.addEventListener("load", function(){
         let deadlineInput = deadlineEl.value;
         let statusEl = document.getElementById("status");
         let statusInput = statusEl.value;
-        let taskListEl = document.getElementById("taskList");
 
         // define a general task object
         let taskObj = {
@@ -58,6 +56,8 @@ window.addEventListener("load", function(){
         badgeEl.classList.add("badge", "rounded-pill", badgeColor);
         badgeEl.innerHTML = taskObj.stat;
 
+        // create the list item for the task list
+        let taskListItemEl = document.createElement("li");
         // add class to li's for bootstrap styling
         taskListItemEl.classList.add('list-group-item');
         // create a div to put in the li
@@ -139,6 +139,9 @@ window.addEventListener("load", function(){
                     console.log(filteredTasks);
                 }; 
 
+                // clear anything already set in the taskListItem to recreate new
+                taskListEl.innerHTML = '';
+
                 // now append the ul with each element using a loop of the filtered task arrays
                 for (task of filteredTasks) {
                     // define variable to get the badge color from the element's stat value
@@ -147,6 +150,64 @@ window.addEventListener("load", function(){
                     let badgeEl = document.createElement('span');
                     badgeEl.classList.add("badge", "rounded-pill", badgeColor);
                     badgeEl.innerHTML = task.stat;
+
+                    // recreate the exact same tiles from the addTask event listener
+                    // create the list item for the task list
+                    let taskListItemEl = document.createElement("li");
+                    // add class to li's for bootstrap styling
+                    taskListItemEl.classList.add('list-group-item');
+                    // create a div to put in the li
+                    let taskListItemDivEl = document.createElement("div");
+                    taskListItemDivEl.innerHTML = `
+                        <div class="row">
+                            <div class="col">${task.task}</div>
+                            <div class="col">${task.cat}</div>
+                            <div class="col">${task.date}</div>
+                            <div class="col" id="badgeListItem"></div>
+                            <div class="col" id="updateListItem"></div>
+                        </div>`
+                    
+                    // adpend the column for the badge with the badge element
+                    let badgeListItem = taskListItemDivEl.querySelector('#badgeListItem');
+                    badgeListItem.appendChild(badgeEl);        
+
+                    // create a div to hold the dropdown 
+                    let updateStatusDiv = document.createElement('div');        
+                    updateStatusDiv.innerHTML = `
+                        <select id="updateStatus" class="form-select">
+                            <option value="">Update Status</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                        </select>
+                    `;
+
+                    // inject the updateStatusDiv in the update column in the task tile
+                    let updateListItem = taskListItemDivEl.querySelector('#updateListItem');
+                    updateListItem.appendChild(updateStatusDiv);
+
+                    // add event listener for the update status column
+                    updateStatusDiv.addEventListener("change", (event) =>{
+                        // target the dropdown and find the value user changed
+                        if (event.target.id === 'updateStatus'){
+                            let newStatus = event.target.value;
+
+                            // update the taskObj.stat to the value selected
+                            task.stat = newStatus;
+                            // call the badgeColor function with this new status
+                            badgeColor = getBadgeColor(newStatus);
+
+                            // update badgeEl with new classes and inner text with the status they chose
+                            badgeEl.innerText = newStatus;
+                            // remove any of the classes which style the badge
+                            badgeEl.classList.remove("text-bg-success", "text-bg-warning", "text-bg-danger");
+                            // add the new badge color based on what was clicked
+                            badgeEl.classList.add(badgeColor);
+                        }
+                    })
+
+                    // append the task List with the list item in a column layout
+                    taskListItemEl.appendChild(taskListItemDivEl);
+                    taskListEl.appendChild(taskListItemEl);
                 }
             };
 
