@@ -1,6 +1,20 @@
 window.addEventListener("load", function(){
     let tasks = [];
     let buttonEl = document.getElementById("addTaskButton");
+    // create the list item for the task list
+    let taskListItemEl = document.createElement("li");
+
+    // function to get badge color for the status section of the task tile
+    function getBadgeColor(status) {
+        switch(status){
+            case 'Completed':
+                return 'text-bg-success';
+            case 'Overdue':
+                return 'text-bg-danger';
+            default:
+                return 'text-bg-warning';
+        }
+    }
 
     // add event listener to add an object with the values to the array
     buttonEl.addEventListener("click", function(){
@@ -36,17 +50,6 @@ window.addEventListener("load", function(){
         }
         addTasks(taskObj);
 
-        // function to get badge color for the status section of the task tile
-        function getBadgeColor(status) {
-            switch(status){
-                case 'Completed':
-                    return 'text-bg-success';
-                case 'Overdue':
-                    return 'text-bg-danger';
-                default:
-                    return 'text-bg-warning';
-            }
-        }
         let badgeColor = getBadgeColor(taskObj.stat);
 
         // create badge element to manipulate it
@@ -55,8 +58,6 @@ window.addEventListener("load", function(){
         badgeEl.classList.add("badge", "rounded-pill", badgeColor);
         badgeEl.innerHTML = taskObj.stat;
 
-        // create the list item for the task list
-        let taskListItemEl = document.createElement("li");
         // add class to li's for bootstrap styling
         taskListItemEl.classList.add('list-group-item');
         // create a div to put in the li
@@ -137,6 +138,16 @@ window.addEventListener("load", function(){
                     filteredTasks = tasks.filter(element => element.stat === filterId);
                     console.log(filteredTasks);
                 }; 
+
+                // now append the ul with each element using a loop of the filtered task arrays
+                for (task of filteredTasks) {
+                    // define variable to get the badge color from the element's stat value
+                    let badgeColor = getBadgeColor(task.stat);
+                    // create the badge element again and import the color class for bootstrap and inner text
+                    let badgeEl = document.createElement('span');
+                    badgeEl.classList.add("badge", "rounded-pill", badgeColor);
+                    badgeEl.innerHTML = task.stat;
+                }
             };
 
             displayFilteredTasks(filterId);
