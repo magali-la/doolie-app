@@ -112,4 +112,18 @@ window.addEventListener("load", function(){
         taskListItemEl.appendChild(taskListItemDivEl);
         taskListEl.appendChild(taskListItemEl);
     });
+
+    // add event listener for clicks on the btn group / filters div
+    let filterGroupEl = document.getElementById('filterButtonGroup');
+    let allButton = document.getElementById('allFilter');
+    let inProgressButton = document.getElementById('progressFilter');
+    let completedButton = document.getElementById('completeFilter');
+    let overdueButton = document.getElementById('overdueFilter');
+
+    filterGroupEl.addEventListener("change", (event) => {
+        // target the actual input elements by bootstrap class 
+        if (event.target.classList.contains('btn-check')) {
+        }
+    });
+
 });

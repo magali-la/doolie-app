@@ -34,17 +34,17 @@
     <button id="addTaskButton" class="btn btn-lg">Add Task</button>
     <h2>Your Tasks:</h2>
     <h3>Filter</h3>
-    <div class="btn-group">
-        <input type="radio" class="btn-check" name="btnradio" id="allFilter" autocomplete="off" checked>
+    <div class="btn-group" id="filterButtonGroup">
+        <input type="radio" class="btn-check" name="btnradio" id="allFilter" autocomplete="off" value="all" checked>
         <label class="btn btn-outline-primary" for="allFilter">All</label>
 
-        <input type="radio" class="btn-check" name="btnradio" id="progressFilter" autocomplete="off">
+        <input type="radio" class="btn-check" name="btnradio" id="progressFilter" autocomplete="off" value="progress">
         <label class="btn btn-outline-primary" for="progressFilter">In Progress</label>
 
-        <input type="radio" class="btn-check" name="btnradio" id="completeFilter" autocomplete="off">
+        <input type="radio" class="btn-check" name="btnradio" id="completeFilter" autocomplete="off" value="complete">
         <label class="btn btn-outline-primary" for="completeFilter">Completed</label>
 
-        <input type="radio" class="btn-check" name="btnradio" id="overdueFilter" autocomplete="off">
+        <input type="radio" class="btn-check" name="btnradio" id="overdueFilter" autocomplete="off" value="overdue">
         <label class="btn btn-outline-primary" for="overdueFilter">Overdue</label>
     </div>
     <div class="row">
