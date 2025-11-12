@@ -115,17 +115,31 @@ window.addEventListener("load", function(){
 
     // add event listener for clicks on the btn group / filters div
     let filterGroupEl = document.getElementById('filterButtonGroup');
-    let allButton = document.getElementById('allFilter');
-    let inProgressButton = document.getElementById('progressFilter');
-    let completedButton = document.getElementById('completeFilter');
-    let overdueButton = document.getElementById('overdueFilter');
 
     filterGroupEl.addEventListener("change", (event) => {
+        console.log(event.target); 
         // target the actual input elements by bootstrap class 
         if (event.target.classList.contains('btn-check')) {
             // define variable for the value of the radio button selected
             let filterId = event.target.value;
             console.log(`Filter clicked: '${filterId}'`);
+
+            // create a function to take the status filter button and filtering tasks into a new array which will be used to display tasks in the ul
+            function displayFilteredTasks(filterButtonValue){ 
+                // create a filtered empty array
+                let filteredTasks = [];
+
+                // filter the task array with all tasks in the current session using the filterId of the button clicked
+                if (filterId === 'all'){
+                    filteredTasks = tasks;
+                    console.log(filteredTasks)
+                } else {
+                    filteredTasks = tasks.filter(element => element.stat === filterId);
+                    console.log(filteredTasks);
+                }; 
+            };
+
+            displayFilteredTasks(filterId);
         }
     });
 
